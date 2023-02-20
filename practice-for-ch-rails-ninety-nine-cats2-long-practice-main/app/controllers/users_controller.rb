@@ -10,7 +10,7 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
 
         if @user.save
-            login(@user)
+            login!(@user)
             redirect_to cats_url
         else
             puts @user.errors.full_messages
