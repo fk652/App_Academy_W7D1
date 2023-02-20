@@ -18,6 +18,14 @@ class User < ApplicationRecord
 
   attr_reader :password
 
+
+  has_many :cats,
+    foreign_key: :owner_id,
+    inverse_of: :owner,
+    dependent: :nullify
+
+
+
   def password=(password)
     self.password_digest = BCrypt::Password.create(password)
     @password = password
