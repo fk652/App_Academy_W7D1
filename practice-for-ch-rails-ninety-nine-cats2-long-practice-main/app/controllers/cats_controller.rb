@@ -43,14 +43,14 @@ class CatsController < ApplicationController
     end
   end
 
-  def require_owner
+  # def require_owner
     
-    cat = current_user.cats.where(id: params[:id])
+  #   cat = current_user.cats.where(id: params[:id])
 
-    if cat.empty?
-      redirect_to cats_url
-    end
-  end
+  #   if cat.empty?
+  #     redirect_to cats_url
+  #   end
+  # end
 
   private
 

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-    helper_method :current_user, :logged_in?
+    helper_method :current_user, :logged_in?, :is_owner?
 
     def login!(user)
         session[:session_token] = user.reset_session_token!
@@ -28,5 +28,17 @@ class ApplicationController < ActionController::Base
         redirect_to cats_url if logged_in?
     end
 
+    def is_owner?
+        cat = current_user.cats.where(id: params[:id])
+        !cat.empty?
+    end
 
+    def require_owner
+    
+        cat = current_user.cats.where(id: params[:id])
+
+        if cat.empty?
+            redirect_to cats_url
+        end
+    end
 end
